@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F71966AE841E48E1BE754186 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F1A6BC5F34A7D9E082A39 /* AppDelegate.swift */; };
+		8322409395044CB4AB603409 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E8DFF3E8C94106ABA04E93 /* AppState.swift */; };
+		F2753E2A6F7D4F54AF636CE0 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97143A09BB415AB01BD8D5 /* MenuBarController.swift */; };
+		CFBE2A6C952541BE890F5E8E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E0F86A385F4580ACD185ED /* main.swift */; };
+		B09F53C87171417EBDBB40FF /* FocusedWindowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78212B66E85543A881AB8FA5 /* FocusedWindowInfo.swift */; };
+		2001D924C2CA4C01911F1113 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F6CE92DADE4852BC69EC57 /* WindowManager.swift */; };
+		1397E7A8EE3A41F8B1F8FC6E /* GridCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D93E01ED741DD8BF21259 /* GridCalculator.swift */; };
+		0F71AACB10A649828FE9BBE1 /* GridOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CE5F4D849AC83060F95 /* GridOverlayController.swift */; };
+		7C374F1631AF49BA94BF48F1 /* GridOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A381D10B3E410E893D1DC2 /* GridOverlayView.swift */; };
+		062900293B124B08951B8515 /* GridOverlayWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC88456647B08B3D0F46 /* GridOverlayWindow.swift */; };
+		FB8998462BC24EF89E2574A4 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A2CDCBE14A43B1BB7FFD94 /* AppConfiguration.swift */; };
+		AB7F88A51C3B4569A8DB70FE /* DefaultKeyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB555D0C2D23489C98B93E77 /* DefaultKeyAssignment.swift */; };
+		D1EE691234E8420A8BDE07EE /* GridAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D2AAD3BE04D1180D28FBB /* GridAppearance.swift */; };
+		E3FE42E4BBD24B7B965C9CCF /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B231826C848437F89DA0EA7 /* GridCell.swift */; };
+		C3DC859ED7AC45B2B003961F /* GridLayoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122F008168343F59BB9ADE5 /* GridLayoutModel.swift */; };
+		D24A7AFD481C4517BD2F8887 /* KeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0A39AB53F44ED931E2B8C /* KeyboardShortcut.swift */; };
+		BD7B3B93F70849A98AA641CF /* GlobalShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B131F63944CD2B5C9CFCE /* GlobalShortcutManager.swift */; };
+		AA5E9F616EBF4596B9091FB1 /* GridKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE95422A29D8412F8F94064F /* GridKeyHandler.swift */; };
+		F704E6211D1043D68118895B /* ShortcutRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CF989202F449FA4112CCE /* ShortcutRecorder.swift */; };
+		08DC3C67E3E5406E976F1BA8 /* GridTileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA66F1400D412A8047FC51 /* GridTileError.swift */; };
+		C5B17CC59E784824A5872360 /* AppearanceEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66E398CA6243888982D9E4 /* AppearanceEditorView.swift */; };
+		6897490B083240CEBF379189 /* GridEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D24129A7184DADBABEE4F0 /* GridEditorView.swift */; };
+		7670801E397C4AACB7F8D93C /* LayoutEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101D8B9672F47A682D8BCC0 /* LayoutEditorView.swift */; };
+		9E42D2E88FEB41ADAD9AD130 /* LayoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709D331FAC8F4CFB8B553512 /* LayoutListView.swift */; };
+		3B10FB5C941045F2AA094EF5 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399780C86AC7481B999A561C /* PermissionsView.swift */; };
+		D8ACBC00A8734C9BB8747B02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AA398EC3DF4DA89838EF85 /* SettingsView.swift */; };
+		6C5396C7DEA6433B9F3FDE41 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314E4E3C67142D78F9D63A0 /* SettingsWindowController.swift */; };
+		AA6BC8D52C2E48F4918F9059 /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773EFCB9CDA648FF9C32573D /* ShortcutRecorderView.swift */; };
+		BB060A63661848D79AF952E2 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1854160AEA1497BA1D103A9 /* AccessibilityManager.swift */; };
+		47DE98F0210647F8A38FEE90 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B1FD8D55F04370A6B67DA4 /* ScreenManager.swift */; };
+		727A23411F7D45D681B605C1 /* ConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5560B85D8B89449E820CE162 /* ConfigurationStore.swift */; };
+		E017A0F9EA2F4763B1035ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE122E24A6C840839C2D8211 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FF8F1A6BC5F34A7D9E082A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		79E8DFF3E8C94106ABA04E93 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		EF97143A09BB415AB01BD8D5 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		38E0F86A385F4580ACD185ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		78212B66E85543A881AB8FA5 /* FocusedWindowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedWindowInfo.swift; sourceTree = "<group>"; };
+		B0F6CE92DADE4852BC69EC57 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		B89D93E01ED741DD8BF21259 /* GridCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCalculator.swift; sourceTree = "<group>"; };
+		3A0D5CE5F4D849AC83060F95 /* GridOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayController.swift; sourceTree = "<group>"; };
+		A3A381D10B3E410E893D1DC2 /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayView.swift; sourceTree = "<group>"; };
+		B685CC88456647B08B3D0F46 /* GridOverlayWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayWindow.swift; sourceTree = "<group>"; };
+		83A2CDCBE14A43B1BB7FFD94 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		AB555D0C2D23489C98B93E77 /* DefaultKeyAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultKeyAssignment.swift; sourceTree = "<group>"; };
+		F89D2AAD3BE04D1180D28FBB /* GridAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridAppearance.swift; sourceTree = "<group>"; };
+		4B231826C848437F89DA0EA7 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		E122F008168343F59BB9ADE5 /* GridLayoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayoutModel.swift; sourceTree = "<group>"; };
+		47A0A39AB53F44ED931E2B8C /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
+		D91B131F63944CD2B5C9CFCE /* GlobalShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalShortcutManager.swift; sourceTree = "<group>"; };
+		AE95422A29D8412F8F94064F /* GridKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridKeyHandler.swift; sourceTree = "<group>"; };
+		879CF989202F449FA4112CCE /* ShortcutRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorder.swift; sourceTree = "<group>"; };
+		89FA66F1400D412A8047FC51 /* GridTileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTileError.swift; sourceTree = "<group>"; };
+		1C66E398CA6243888982D9E4 /* AppearanceEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceEditorView.swift; sourceTree = "<group>"; };
+		50D24129A7184DADBABEE4F0 /* GridEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridEditorView.swift; sourceTree = "<group>"; };
+		1101D8B9672F47A682D8BCC0 /* LayoutEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutEditorView.swift; sourceTree = "<group>"; };
+		709D331FAC8F4CFB8B553512 /* LayoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutListView.swift; sourceTree = "<group>"; };
+		399780C86AC7481B999A561C /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
+		33AA398EC3DF4DA89838EF85 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E314E4E3C67142D78F9D63A0 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		773EFCB9CDA648FF9C32573D /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorderView.swift; sourceTree = "<group>"; };
+		A1854160AEA1497BA1D103A9 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
+		12B1FD8D55F04370A6B67DA4 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		5560B85D8B89449E820CE162 /* ConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationStore.swift; sourceTree = "<group>"; };
+		FE122E24A6C840839C2D8211 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89B8B25B728A47C0B6FB97C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		526517541BC34A9789943734 /* GridTile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GridTile.entitlements; sourceTree = "<group>"; };
+		E0DC23A825B246B483F070F6 /* GridTile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridTile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		179166D3ABDD45A68C877649 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B2A98263FF1848EB92CEDE20 /* WindowManagement */ = {
+			isa = PBXGroup;
+			children = (
+				78212B66E85543A881AB8FA5 /* FocusedWindowInfo.swift */,
+				B0F6CE92DADE4852BC69EC57 /* WindowManager.swift */,
+			);
+			path = WindowManagement;
+			sourceTree = "<group>";
+		};
+		12292E18FD714B1BA9C4AA5A /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				B89D93E01ED741DD8BF21259 /* GridCalculator.swift */,
+				3A0D5CE5F4D849AC83060F95 /* GridOverlayController.swift */,
+				A3A381D10B3E410E893D1DC2 /* GridOverlayView.swift */,
+				B685CC88456647B08B3D0F46 /* GridOverlayWindow.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		AA12F02DB938452C8934E583 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				83A2CDCBE14A43B1BB7FFD94 /* AppConfiguration.swift */,
+				AB555D0C2D23489C98B93E77 /* DefaultKeyAssignment.swift */,
+				F89D2AAD3BE04D1180D28FBB /* GridAppearance.swift */,
+				4B231826C848437F89DA0EA7 /* GridCell.swift */,
+				E122F008168343F59BB9ADE5 /* GridLayoutModel.swift */,
+				47A0A39AB53F44ED931E2B8C /* KeyboardShortcut.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FEC05A4521AD4819B0754469 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D91B131F63944CD2B5C9CFCE /* GlobalShortcutManager.swift */,
+				AE95422A29D8412F8F94064F /* GridKeyHandler.swift */,
+				879CF989202F449FA4112CCE /* ShortcutRecorder.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		DD253F9435A94C6A864DCE3F /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				89FA66F1400D412A8047FC51 /* GridTileError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		1BC44F0E1360427B9650AAE2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1C66E398CA6243888982D9E4 /* AppearanceEditorView.swift */,
+				50D24129A7184DADBABEE4F0 /* GridEditorView.swift */,
+				1101D8B9672F47A682D8BCC0 /* LayoutEditorView.swift */,
+				709D331FAC8F4CFB8B553512 /* LayoutListView.swift */,
+				399780C86AC7481B999A561C /* PermissionsView.swift */,
+				33AA398EC3DF4DA89838EF85 /* SettingsView.swift */,
+				E314E4E3C67142D78F9D63A0 /* SettingsWindowController.swift */,
+				773EFCB9CDA648FF9C32573D /* ShortcutRecorderView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C2726D982CF34945B449B74E /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				A1854160AEA1497BA1D103A9 /* AccessibilityManager.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		38117025DC4B4B60AD887620 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				12B1FD8D55F04370A6B67DA4 /* ScreenManager.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		D22D8FDEE6204B5081BE99C9 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				5560B85D8B89449E820CE162 /* ConfigurationStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		9F5033BABB4C445392DA3C8D /* GridTile */ = {
+			isa = PBXGroup;
+			children = (
+				FF8F1A6BC5F34A7D9E082A39 /* AppDelegate.swift */,
+				79E8DFF3E8C94106ABA04E93 /* AppState.swift */,
+				EF97143A09BB415AB01BD8D5 /* MenuBarController.swift */,
+				38E0F86A385F4580ACD185ED /* main.swift */,
+				DD253F9435A94C6A864DCE3F /* Errors */,
+				12292E18FD714B1BA9C4AA5A /* Grid */,
+				FEC05A4521AD4819B0754469 /* Keyboard */,
+				AA12F02DB938452C8934E583 /* Models */,
+				C2726D982CF34945B449B74E /* Permissions */,
+				D22D8FDEE6204B5081BE99C9 /* Persistence */,
+				38117025DC4B4B60AD887620 /* Screen */,
+				1BC44F0E1360427B9650AAE2 /* Settings */,
+				B2A98263FF1848EB92CEDE20 /* WindowManagement */,
+				FE122E24A6C840839C2D8211 /* Assets.xcassets */,
+				89B8B25B728A47C0B6FB97C3 /* Info.plist */,
+				526517541BC34A9789943734 /* GridTile.entitlements */,
+			);
+			path = GridTile;
+			sourceTree = "<group>";
+		};
+		263F2A4FFB9F4E51B9F81631 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E0DC23A825B246B483F070F6 /* GridTile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A56CDC5282AD467CAB515332 = {
+			isa = PBXGroup;
+			children = (
+				9F5033BABB4C445392DA3C8D /* GridTile */,
+				263F2A4FFB9F4E51B9F81631 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E1DD594B7D834CE7B8E0748A /* GridTile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 783F7513CD0D4E1193C86AF8 /* Build configuration list for PBXNativeTarget "GridTile" */;
+			buildPhases = (
+				C28E2AFE18CB4CA1AA1B9F27 /* Sources */,
+				179166D3ABDD45A68C877649 /* Frameworks */,
+				8F0B36B086B04797B4ACE729 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GridTile;
+			productName = GridTile;
+			productReference = E0DC23A825B246B483F070F6 /* GridTile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C858D8B66DE846BDB4B18175 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					E1DD594B7D834CE7B8E0748A = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 80FF17FC95AF4E57B8917F73 /* Build configuration list for PBXProject "GridTile" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A56CDC5282AD467CAB515332;
+			productRefGroup = 263F2A4FFB9F4E51B9F81631 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E1DD594B7D834CE7B8E0748A /* GridTile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F0B36B086B04797B4ACE729 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E017A0F9EA2F4763B1035ABE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C28E2AFE18CB4CA1AA1B9F27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F71966AE841E48E1BE754186 /* AppDelegate.swift in Sources */,
+				8322409395044CB4AB603409 /* AppState.swift in Sources */,
+				F2753E2A6F7D4F54AF636CE0 /* MenuBarController.swift in Sources */,
+				CFBE2A6C952541BE890F5E8E /* main.swift in Sources */,
+				B09F53C87171417EBDBB40FF /* FocusedWindowInfo.swift in Sources */,
+				2001D924C2CA4C01911F1113 /* WindowManager.swift in Sources */,
+				1397E7A8EE3A41F8B1F8FC6E /* GridCalculator.swift in Sources */,
+				0F71AACB10A649828FE9BBE1 /* GridOverlayController.swift in Sources */,
+				7C374F1631AF49BA94BF48F1 /* GridOverlayView.swift in Sources */,
+				062900293B124B08951B8515 /* GridOverlayWindow.swift in Sources */,
+				FB8998462BC24EF89E2574A4 /* AppConfiguration.swift in Sources */,
+				AB7F88A51C3B4569A8DB70FE /* DefaultKeyAssignment.swift in Sources */,
+				D1EE691234E8420A8BDE07EE /* GridAppearance.swift in Sources */,
+				E3FE42E4BBD24B7B965C9CCF /* GridCell.swift in Sources */,
+				C3DC859ED7AC45B2B003961F /* GridLayoutModel.swift in Sources */,
+				D24A7AFD481C4517BD2F8887 /* KeyboardShortcut.swift in Sources */,
+				BD7B3B93F70849A98AA641CF /* GlobalShortcutManager.swift in Sources */,
+				AA5E9F616EBF4596B9091FB1 /* GridKeyHandler.swift in Sources */,
+				F704E6211D1043D68118895B /* ShortcutRecorder.swift in Sources */,
+				08DC3C67E3E5406E976F1BA8 /* GridTileError.swift in Sources */,
+				C5B17CC59E784824A5872360 /* AppearanceEditorView.swift in Sources */,
+				6897490B083240CEBF379189 /* GridEditorView.swift in Sources */,
+				7670801E397C4AACB7F8D93C /* LayoutEditorView.swift in Sources */,
+				9E42D2E88FEB41ADAD9AD130 /* LayoutListView.swift in Sources */,
+				3B10FB5C941045F2AA094EF5 /* PermissionsView.swift in Sources */,
+				D8ACBC00A8734C9BB8747B02 /* SettingsView.swift in Sources */,
+				6C5396C7DEA6433B9F3FDE41 /* SettingsWindowController.swift in Sources */,
+				AA6BC8D52C2E48F4918F9059 /* ShortcutRecorderView.swift in Sources */,
+				BB060A63661848D79AF952E2 /* AccessibilityManager.swift in Sources */,
+				47DE98F0210647F8A38FEE90 /* ScreenManager.swift in Sources */,
+				727A23411F7D45D681B605C1 /* ConfigurationStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6162A3B97F2A4E4D9267F578 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		111A265B3D1F4E0E9421D7D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		84BE98EF646A4FB5A3F72061 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = GridTile/GridTile.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GridTile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gridtile.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				ENABLE_HARDENED_RUNTIME = YES;
+			};
+			name = Debug;
+		};
+		EB1C9FB2760042499E0162FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = GridTile/GridTile.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GridTile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gridtile.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				ENABLE_HARDENED_RUNTIME = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		80FF17FC95AF4E57B8917F73 /* Build configuration list for PBXProject "GridTile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6162A3B97F2A4E4D9267F578 /* Debug */,
+				111A265B3D1F4E0E9421D7D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		783F7513CD0D4E1193C86AF8 /* Build configuration list for PBXNativeTarget "GridTile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84BE98EF646A4FB5A3F72061 /* Debug */,
+				EB1C9FB2760042499E0162FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C858D8B66DE846BDB4B18175 /* Project object */;
+}

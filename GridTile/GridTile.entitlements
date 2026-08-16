@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- The App Sandbox does not permit AXUIElement manipulation of other
+	     applications' windows, which is GridTile's core function, so it is
+	     intentionally left disabled. This means GridTile must be distributed
+	     outside the Mac App Store (direct download / notarization), which is
+	     standard for this category of native macOS window-tiling utility. -->
+	<key>com.apple.security.app-sandbox</key>
+	<false/>
+</dict>
+</plist>
