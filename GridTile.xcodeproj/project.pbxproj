@@ -20,6 +20,9 @@
 		FB8998462BC24EF89E2574A4 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A2CDCBE14A43B1BB7FFD94 /* AppConfiguration.swift */; };
 		AB7F88A51C3B4569A8DB70FE /* DefaultKeyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB555D0C2D23489C98B93E77 /* DefaultKeyAssignment.swift */; };
 		D1EE691234E8420A8BDE07EE /* GridAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D2AAD3BE04D1180D28FBB /* GridAppearance.swift */; };
+		3F54A7D68F81460C9C8BD637 /* BackgroundStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5756B9E12A56BFAE12C38BE /* BackgroundStyle.swift */; };
+		B3F1B2670566BAFB0BB4E107 /* GridBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8254F523C68506295D9FED5E /* GridBackgroundView.swift */; };
+		573644A4D9BEFC3CB97F2827 /* VisualEffectBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0947680A1D9BE409F89FB83 /* VisualEffectBackground.swift */; };
 		E3FE42E4BBD24B7B965C9CCF /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B231826C848437F89DA0EA7 /* GridCell.swift */; };
 		C3DC859ED7AC45B2B003961F /* GridLayoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122F008168343F59BB9ADE5 /* GridLayoutModel.swift */; };
 		D24A7AFD481C4517BD2F8887 /* KeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0A39AB53F44ED931E2B8C /* KeyboardShortcut.swift */; };
@@ -55,6 +58,9 @@
 		83A2CDCBE14A43B1BB7FFD94 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		AB555D0C2D23489C98B93E77 /* DefaultKeyAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultKeyAssignment.swift; sourceTree = "<group>"; };
 		F89D2AAD3BE04D1180D28FBB /* GridAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridAppearance.swift; sourceTree = "<group>"; };
+		D5756B9E12A56BFAE12C38BE /* BackgroundStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundStyle.swift; sourceTree = "<group>"; };
+		8254F523C68506295D9FED5E /* GridBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBackgroundView.swift; sourceTree = "<group>"; };
+		D0947680A1D9BE409F89FB83 /* VisualEffectBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBackground.swift; sourceTree = "<group>"; };
 		4B231826C848437F89DA0EA7 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		E122F008168343F59BB9ADE5 /* GridLayoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayoutModel.swift; sourceTree = "<group>"; };
 		47A0A39AB53F44ED931E2B8C /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 				3A0D5CE5F4D849AC83060F95 /* GridOverlayController.swift */,
 				A3A381D10B3E410E893D1DC2 /* GridOverlayView.swift */,
 				B685CC88456647B08B3D0F46 /* GridOverlayWindow.swift */,
+				8254F523C68506295D9FED5E /* GridBackgroundView.swift */,
+				D0947680A1D9BE409F89FB83 /* VisualEffectBackground.swift */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -114,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				83A2CDCBE14A43B1BB7FFD94 /* AppConfiguration.swift */,
+				D5756B9E12A56BFAE12C38BE /* BackgroundStyle.swift */,
 				AB555D0C2D23489C98B93E77 /* DefaultKeyAssignment.swift */,
 				F89D2AAD3BE04D1180D28FBB /* GridAppearance.swift */,
 				4B231826C848437F89DA0EA7 /* GridCell.swift */,
@@ -301,6 +310,9 @@
 				FB8998462BC24EF89E2574A4 /* AppConfiguration.swift in Sources */,
 				AB7F88A51C3B4569A8DB70FE /* DefaultKeyAssignment.swift in Sources */,
 				D1EE691234E8420A8BDE07EE /* GridAppearance.swift in Sources */,
+				3F54A7D68F81460C9C8BD637 /* BackgroundStyle.swift in Sources */,
+				B3F1B2670566BAFB0BB4E107 /* GridBackgroundView.swift in Sources */,
+				573644A4D9BEFC3CB97F2827 /* VisualEffectBackground.swift in Sources */,
 				E3FE42E4BBD24B7B965C9CCF /* GridCell.swift in Sources */,
 				C3DC859ED7AC45B2B003961F /* GridLayoutModel.swift in Sources */,
 				D24A7AFD481C4517BD2F8887 /* KeyboardShortcut.swift in Sources */,

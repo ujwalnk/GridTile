@@ -20,6 +20,10 @@ struct GridOverlayView: View {
         )
 
         ZStack(alignment: .topLeading) {
+            // Uniform backdrop, sized to cover the full usable screen area,
+            // below every tile. See `GridBackgroundView`.
+            GridBackgroundView(appearance: appearance)
+
             ForEach(cells, id: \.hashID) { computed in
                 if let cell = layout.cell(row: computed.row, column: computed.column) {
                     cellView(cell: cell, rect: computed.rect, appearance: appearance)
@@ -27,7 +31,6 @@ struct GridOverlayView: View {
             }
         }
         .frame(width: localBounds.width, height: localBounds.height)
-        .background(Color.clear)
     }
 
     @ViewBuilder

@@ -30,6 +30,10 @@ struct AppearanceEditorView: View {
                         TextField("Font", text: $appearance.fontName)
                             .textFieldStyle(.roundedBorder)
                     }
+                    section("Background Style") {
+                        backgroundStylePicker
+                        backgroundStyleControls
+                    }
                 }
                 .frame(width: 260)
 
@@ -44,20 +48,62 @@ struct AppearanceEditorView: View {
     }
 
     private var previewCell: some View {
-        RoundedRectangle(cornerRadius: appearance.cornerRadius, style: .continuous)
-            .fill(Color(appearance.fillColor.nsColor).opacity(appearance.fillOpacity))
-            .overlay(
-                RoundedRectangle(cornerRadius: appearance.cornerRadius, style: .continuous)
-                    .stroke(Color(appearance.borderColor.nsColor), lineWidth: appearance.borderWidth)
-                    .opacity(appearance.borderOpacity)
-            )
-            .overlay(
-                Text("A")
-                    .font(Font(appearance.font))
-                    .foregroundColor(Color(appearance.textColor.nsColor).opacity(appearance.textOpacity))
-            )
-            .padding(appearance.cellPadding)
-            .background(Color.black.opacity(0.15))
+        ZStack {
+            // A faint checkerboard-ish backdrop stands in for "whatever is
+            // behind the overlay" so Transparent/macOS Material previews
+            // read clearly even inside the opaque Settings window.
+            Color.black.opacity(0.15)
+            GridBackgroundView(appearance: appearance)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius, style: .continuous)
+                .fill(Color(appearance.fillColor.nsColor).opacity(appearance.fillOpacity))
+                .overlay(
+                    RoundedRectangle(cornerRadius: appearance.cornerRadius, style: .continuous)
+                        .stroke(Color(appearance.borderColor.nsColor), lineWidth: appearance.borderWidth)
+                        .opacity(appearance.borderOpacity)
+                )
+                .overlay(
+                    Text("A")
+                        .font(Font(appearance.font))
+                        .foregroundColor(Color(appearance.textColor.nsColor).opacity(appearance.textOpacity))
+                )
+                .padding(appearance.cellPadding)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+
+    @ViewBuilder
+    private var backgroundStylePicker: some View {
+        Picker("", selection: $appearance.backgroundStyle) {
+            ForEach(BackgroundStyle.allCases) { style in
+                Text(style.displayName).tag(style)
+            }
+        }
+        .pickerStyle(.radioGroup)
+        .labelsHidden()
+    }
+
+    @ViewBuilder
+    private var backgroundStyleControls: some View {
+        switch appearance.backgroundStyle {
+        case .transparent:
+            EmptyView()
+
+        case .solidColor:
+            ColorPicker("Color", selection: colorBinding(\.backgroundColor))
+            opacitySlider("Opacity", $appearance.backgroundOpacity)
+
+        case .macOSMaterial:
+            Picker("Material", selection: $appearance.backgroundMaterial) {
+                ForEach(BackgroundMaterial.allCases) { material in
+                    Text(material.displayName).tag(material)
+                }
+            }
+            .pickerStyle(.menu)
+            ColorPicker("Tint", selection: colorBinding(\.backgroundMaterialTintColor))
+            // Capped well below 1.0 — this is meant as a subtle wash over the
+            // native material, not a replacement for it.
+            opacitySlider("Tint Amount", $appearance.backgroundMaterialTintOpacity, range: 0...0.5)
+        }
     }
 
     @ViewBuilder
@@ -69,10 +115,10 @@ struct AppearanceEditorView: View {
         .padding(.bottom, 6)
     }
 
-    private func opacitySlider(_ title: String, _ value: Binding<Double>) -> some View {
+    private func opacitySlider(_ title: String, _ value: Binding<Double>, range: ClosedRange<Double> = 0...1) -> some View {
         HStack {
-            Text(title).frame(width: 70, alignment: .leading)
-            Slider(value: value, in: 0...1)
+            Text(title).frame(width: 80, alignment: .leading)
+            Slider(value: value, in: range)
             Text("\(Int(value.wrappedValue * 100))%").frame(width: 40, alignment: .trailing).font(.caption)
         }
     }
