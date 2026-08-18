@@ -43,10 +43,28 @@ final class AppState: ObservableObject {
         var layout = DefaultLayoutFactory.makeDefaultLayout()
         layout.id = UUID()
         layout.name = "Layout \(index)"
-        layout.activationShortcut = KeyboardShortcut.defaultActivationShortcut(index: index)
+        layout.activationShortcut = nextAvailableDefaultActivationShortcut()
         configuration.layouts.append(layout)
         persistAndReregister()
         return layout
+    }
+
+    /// `⌃⌥<N>`-style defaults are derived from a layout's position, but a
+    /// layout can be removed and a new one added later, or an existing
+    /// layout's shortcut can be hand-edited — either can leave the "next"
+    /// positional default already claimed by another layout. Walking forward
+    /// until an unclaimed one is found keeps every new layout's shortcut
+    /// independently usable from the moment it's created, rather than
+    /// handing out one that immediately conflicts (§9).
+    private func nextAvailableDefaultActivationShortcut() -> KeyboardShortcut {
+        let used = Set(configuration.layouts.map(\.activationShortcut))
+        var index = configuration.layouts.count + 1
+        var candidate = KeyboardShortcut.defaultActivationShortcut(index: index)
+        while used.contains(candidate) {
+            index += 1
+            candidate = KeyboardShortcut.defaultActivationShortcut(index: index)
+        }
+        return candidate
     }
 
     func removeLayout(id: UUID) {
@@ -61,6 +79,14 @@ final class AppState: ObservableObject {
             return "already used by \"\(match.name)\""
         }
         return nil
+    }
+
+    /// Lets Settings UI surface a user-facing error (e.g. a rejected,
+    /// already-in-use activation shortcut) through the same alert path as
+    /// every other `GridTileError` (see `AppDelegate`), without exposing a
+    /// general-purpose public setter for `lastError`.
+    func reportError(_ error: GridTileError) {
+        lastError = error
     }
 
     private func persistAndReregister() {

@@ -78,7 +78,24 @@ final class GridOverlayController {
                 return
             }
 
-            let localSpan = GridCalculator.spanningRect(firstRect, secondRect)
+            let rawSpan = GridCalculator.spanningRect(firstRect, secondRect)
+            // The tiled window's edges get the same padding/2 inset each
+            // individual cell gets in the overlay (see `GridOverlayView`),
+            // not just the overlay's own rendering — so `cellPadding`
+            // actually controls the gap between the tiled window and its
+            // neighbors (adjacent windows, the screen edge, etc.), not only
+            // how the grid overlay looks while selecting. Guard the same way
+            // `GridOverlayView` does: if padding is large enough to overrun a
+            // very thin span, clamp to a centered zero-size rect rather than
+            // letting the inset flip the rectangle inside-out.
+            let padding = CGFloat(layout.appearance.cellPadding)
+            let insetSpan = rawSpan.insetBy(dx: padding / 2, dy: padding / 2)
+            let localSpan = CGRect(
+                x: insetSpan.width >= 0 ? insetSpan.minX : rawSpan.midX,
+                y: insetSpan.height >= 0 ? insetSpan.minY : rawSpan.midY,
+                width: max(0, insetSpan.width),
+                height: max(0, insetSpan.height)
+            )
             // `localSpan` is in GridCalculator's top-left-origin, y-down space
             // (see its doc comment). AppKit screen frames are bottom-left-
             // origin, y-up, so the y axis must be flipped — using the

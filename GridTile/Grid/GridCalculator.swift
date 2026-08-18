@@ -6,10 +6,12 @@ import CoreGraphics
 /// window-frame calculation, guaranteeing they never disagree (§6, §15).
 enum GridCalculator {
     /// One computed cell: its position in the grid and its rectangle within
-    /// the *content* area (i.e. already inset from the outer bounds — padding
-    /// between cells is handled by the caller/renderer per §14, not baked in
-    /// here, so the same geometry can back both the visual grid and the final
-    /// window rect without padding artifacts on the tiled window).
+    /// the *content* area (i.e. already inset from the outer bounds). This
+    /// raw geometry has no padding baked in — both the overlay renderer and
+    /// `GridOverlayController`'s final window-frame calculation apply
+    /// `appearance.cellPadding` themselves (each insetting by `padding / 2`),
+    /// so the visual grid and the resulting tiled window's gap from its
+    /// neighbors always agree without padding being computed twice here.
     struct ComputedCell {
         let row: Int
         let column: Int

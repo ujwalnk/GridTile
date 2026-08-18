@@ -17,9 +17,15 @@ final class MenuBarController: NSObject, NSMenuDelegate {
         super.init()
 
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "square.grid.3x3.fill", accessibilityDescription: "GridTile")
-            button.image?.isTemplate = true
+            if let image = NSImage(named: "icon-bw") {
+
+                image.isTemplate = false
+                image.size = NSSize(width: 18, height: 18)
+
+                button.image = image
+            } 
         }
+
 
         let menu = NSMenu()
         menu.delegate = self

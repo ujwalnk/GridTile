@@ -39,23 +39,45 @@ private struct ShortcutRecorderRepresentable: NSViewRepresentable {
 
     func makeNSView(context: Context) -> RecorderButtonView {
         let view = RecorderButtonView()
-        view.onClick = {
-            isRecording = true
-            view.beginRecording()
-        }
-        view.recorder.onCapture = { shortcut in
-            isRecording = false
-            onCapture(shortcut)
-        }
-        view.recorder.onCancel = {
-            isRecording = false
-        }
+        bindCallbacks(to: view)
         return view
     }
 
     func updateNSView(_ nsView: RecorderButtonView, context: Context) {
+        // Re-bind the callbacks on every update, not just in `makeNSView`.
+        //
+        // `makeNSView` only runs once for the lifetime of this view's
+        // *identity* — and since `LayoutEditorView` doesn't tag itself with
+        // `.id(layout.id)`, SwiftUI reuses the same `RecorderButtonView`
+        // instance when the settings window switches from editing one
+        // layout to another (same structural position in the view tree).
+        // If the `onCapture`/`onClick` closures below were only ever set in
+        // `makeNSView`, they'd stay bound to whichever layout's `shortcut`
+        // binding happened to be current the *first* time this control was
+        // created — so recording a new shortcut while a different layout is
+        // selected in the UI would silently write that shortcut into the
+        // *original* layout instead of the one on screen, even though the
+        // label correctly shows the newly selected layout's current
+        // shortcut (since that part *does* get refreshed here). Rebinding
+        // on every update keeps the callbacks pointed at whatever bindings
+        // this particular render actually passed in.
+        bindCallbacks(to: nsView)
         nsView.label.stringValue = displayText
         nsView.setHighlighted(isRecording)
+    }
+
+    private func bindCallbacks(to view: RecorderButtonView) {
+        view.onClick = { [isRecording = $isRecording] in
+            isRecording.wrappedValue = true
+            view.beginRecording()
+        }
+        view.recorder.onCapture = { [isRecording = $isRecording, onCapture] capturedShortcut in
+            isRecording.wrappedValue = false
+            onCapture(capturedShortcut)
+        }
+        view.recorder.onCancel = { [isRecording = $isRecording] in
+            isRecording.wrappedValue = false
+        }
     }
 }
 
