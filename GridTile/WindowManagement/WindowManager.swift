@@ -21,10 +21,11 @@ enum WindowManager {
 
         let axFrame = Self.axFrame(fromCocoaFrame: targetFrame)
 
-        // Setting size before position (then re-setting position) reduces
-        // cases where a window that refuses a given size ends up with a
-        // correct size but a stale, no-longer-matching position — a known
-        // quirk of some AXUIElement implementations.
+        // Position is applied before size so that, for apps which validate a
+        // requested size against the window's *current* on-screen position
+        // (rejecting/clamping sizes that would put the window off-screen at
+        // its old location), the size request is evaluated against the
+        // frame's *new* origin rather than a stale one.
         var size = CGSize(width: axFrame.width, height: axFrame.height)
         var origin = CGPoint(x: axFrame.origin.x, y: axFrame.origin.y)
 
@@ -35,12 +36,32 @@ enum WindowManager {
 
         let positionResult = AXUIElementSetAttributeValue(window.axWindow, kAXPositionAttribute as CFString, positionValue)
         let sizeResult = AXUIElementSetAttributeValue(window.axWindow, kAXSizeAttribute as CFString, sizeValue)
-        // Re-apply position once more: some apps clamp size in a way that
-        // shifts position as a side effect.
-        AXUIElementSetAttributeValue(window.axWindow, kAXPositionAttribute as CFString, positionValue)
 
         guard positionResult == .success, sizeResult == .success else {
             throw GridTileError.windowMoveFailed("the application declined the new frame")
+        }
+
+        // Some apps clamp size in a way that shifts position as a side
+        // effect, so the resulting position can drift from what was
+        // requested even though both calls above reported success. Correct
+        // that — but only when it actually happened: re-issuing the position
+        // write unconditionally, immediately after the size write, races
+        // with apps that apply a programmatic resize asynchronously (e.g. on
+        // their next layout/display pass rather than synchronously inside
+        // the AX call). For those apps, an unconditional follow-up position
+        // write can be processed by the app *before* its own pending resize
+        // has been committed internally; the app then re-derives the frame
+        // from its still-stale size when handling the move, silently
+        // discarding the resize. That race is what produced GridTile's
+        // intermittent "moved but not resized" bug. Reading the actual
+        // resulting frame back and only correcting position when it's
+        // actually wrong avoids sending that redundant, racy AX call in the
+        // common case.
+        if let resultingFrame = currentFrame(of: window) {
+            let resultingAXFrame = Self.axFrame(fromCocoaFrame: resultingFrame)
+            if abs(resultingAXFrame.origin.x - origin.x) > 0.5 || abs(resultingAXFrame.origin.y - origin.y) > 0.5 {
+                AXUIElementSetAttributeValue(window.axWindow, kAXPositionAttribute as CFString, positionValue)
+            }
         }
     }
 
