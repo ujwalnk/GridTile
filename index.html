@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GridTile — Move windows with your keyboard</title>
+<meta name="description" content="GridTile is a fast, keyboard-driven window tiler for macOS. Press a shortcut, tap two keys, and your window snaps into place.">
+<meta name="theme-color" content="#F5F7FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080B14" media="(prefers-color-scheme: dark)">
+
+<meta property="og:title" content="GridTile — Move windows with your keyboard">
+<meta property="og:description" content="A fast, keyboard-driven window tiler for macOS. Two keys, one window, done.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-image.svg">
+
+<link rel="icon" type="image/svg+xml" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+  <img class="brand-icon" src="./favicon.png" alt="">
+  GridTile
+</a>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Appearance: System. Activate to change.">
+        <svg class="theme-icon theme-icon-system" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="4" width="15" height="10.5" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="M7 17.5h6M10 14.5v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <svg class="theme-icon theme-icon-light" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="3.6" stroke="currentColor" stroke-width="1.4"/><path d="M10 2.4v2M10 15.6v2M17.6 10h-2M4.4 10h-2M15.4 4.6l-1.4 1.4M6 14l-1.4 1.4M15.4 15.4L14 14M6 6 4.6 4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <svg class="theme-icon theme-icon-dark" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.8 12.2A6.8 6.8 0 0 1 7.8 3.2a6.8 6.8 0 1 0 9 9Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="https://github.com/ujwalnk/GridTile">GitHub</a></li>
+        <li><a href="https://github.com/ujwalnk/GridTile/releases/latest" class="nav-download">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO: the simulated macOS desktop IS the product demo -->
+  <section class="hero" id="top">
+    <div class="mac-desktop" id="macDesktop">
+
+      <div class="mac-menubar">
+        <div class="mac-menubar-left">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+  <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+  <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+</svg>
+          <span class="menu-app">Terminal</span>
+          <span class="menu-item">File</span>
+          <span class="menu-item">Edit</span>
+          <span class="menu-item">View</span>
+          <span class="menu-item">Window</span>
+          <span class="menu-item">Help</span>
+        </div>
+        <div class="mac-menubar-right">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wifi" viewBox="0 0 16 16">
+  <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.44 12.44 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.52.52 0 0 0 .668.05A11.45 11.45 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049"/>
+  <path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.46 9.46 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065m-2.183 2.183c.226-.226.185-.605-.1-.75A6.5 6.5 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.5 5.5 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091zM9.06 12.44c.196-.196.198-.52-.04-.66A2 2 0 0 0 8 11.5a2 2 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z"/>
+</svg>
+          <svg class="menubar-glyph battery-glyph" viewBox="0 0 26 12" aria-hidden="true"><rect x="1" y="1.5" width="20" height="9" rx="2" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="3" width="14" height="6" rx="1" fill="currentColor" opacity="0.85"/><rect x="22.5" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+          <span class="menu-clock" id="menuClock">10:42</span>
+        </div>
+      </div>
+
+      <div class="mac-wallpaper" id="macWallpaper">
+        <div class="wallpaper-glow" aria-hidden="true"></div>
+
+        <h1 class="wallpaper-headline" id="wallpaperHeadline">
+          <span class="hl-line hl-line-1">Move windows with your</span>
+          <span class="hl-line hl-line-2">keyboard.</span>
+        </h1>
+
+        <div class="hero-instruction" id="heroInstruction" role="status" aria-live="polite">
+          <p class="instruction-primary" id="instructionPrimary">PRESS <em>Q</em> and <em> D</p>
+          <p class="instruction-secondary" id="instructionSecondary">to move this window</p>
+          <div class="hint-keyboard" id="hintKeyboard" aria-hidden="true"></div>
+        </div>
+
+        <!-- fake windows -->
+        <div class="fake-window" id="win-safari" data-app="safari" style="--x: 61.3%; --y: 1.3%; --w: 37.4%; --h: 97.4%; --z: 2;">
+          <div class="win-titlebar">
+            <span class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win-title">Safari</span>
+          </div>
+          <div class="win-body win-body-safari">
+            <div class="safari-toolbar"><span class="safari-url">gridtile.app</span></div>
+            <div class="safari-block big"></div>
+            <div class="safari-row">
+              <div class="safari-block"></div>
+              <div class="safari-block"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fake-window" id="win-xcode" data-app="xcode" style="--x: 1.3%; --y: 67.96666666666667%; --w: 57.4%; --h: 30.733333333333334%; --z: 2;">
+          <div class="win-titlebar">
+            <span class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win-title">GridTile.xcodeproj</span>
+          </div>
+          <div class="win-body win-body-xcode">
+            <div class="xcode-sidebar">
+              <div class="xcode-file"></div>
+              <div class="xcode-file"></div>
+              <div class="xcode-file short"></div>
+            </div>
+            <div class="xcode-code">
+              <div class="code-line"></div>
+              <div class="code-line short"></div>
+              <div class="code-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fake-window is-active" id="win-terminal" data-app="terminal" style="--x:34%; --y:20%; --w:32%; --h:32%; --z:3;" aria-label="Terminal — the active window">
+          <div class="win-titlebar">
+            <span class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win-title">Terminal</span>
+            <span class="active-dot" aria-hidden="true"></span>
+          </div>
+          <div class="win-body win-body-terminal">
+            <p class="dim">Last login: Today</p>
+            <p><span class="prompt">~ %</span> git status</p>
+            <p class="dim">On branch main</p>
+            <p class="dim">nothing to commit, working tree clean</p>
+            <p><span class="prompt">~ %</span> <span class="cursor" aria-hidden="true">▌</span></p>
+          </div>
+        </div>
+
+        <!-- grid overlay -->
+        <div class="grid-overlay" id="gridOverlay" role="group" aria-label="GridTile activation grid. Press two keys to move the active window."></div>
+      </div>
+
+      <div class="mac-dock" aria-hidden="true">
+        <span class="dock-icon dock-icon-1"></span>
+        <span class="dock-icon dock-icon-2"></span>
+        <span class="dock-icon dock-icon-3"></span>
+        <span class="dock-icon dock-icon-4"></span>
+        <span class="dock-divider"></span>
+        <span class="dock-icon dock-icon-5"></span>
+        <span class="dock-icon dock-icon-6"></span>
+      </div>
+    </div>
+
+    <div class="hero-footer">
+      <div class="keyboard" id="keyboard" aria-hidden="true"></div>
+      <button class="demo-reset" id="demoReset" type="button">Reset demo</button>
+    </div>
+  </section>
+
+  <!-- TWO KEYS. ONE WINDOW. -->
+  <section class="section concept-section" id="how-it-works">
+    <div class="section-inner">
+      <h2>Two keys. One window.</h2>
+      <p class="section-lede">Activate GridTile, press a corner, press the opposite corner. Done.</p>
+
+      <ol class="flow-list">
+        <li>
+          <span class="flow-index">1</span>
+          <div class="flow-copy"><h3>Activate</h3><p>Your shortcut brings up the grid.</p></div>
+        </li>
+        <li>
+          <span class="flow-index">2</span>
+          <div class="flow-copy"><h3>Press a corner</h3><p>One key marks where the window starts.</p></div>
+        </li>
+        <li>
+          <span class="flow-index">3</span>
+          <div class="flow-copy"><h3>Press the opposite corner</h3><p>Order doesn't matter.</p></div>
+        </li>
+        <li>
+          <span class="flow-index">4</span>
+          <div class="flow-copy"><h3>Done</h3><p>The window snaps into place.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- STOP DRAGGING (compact) -->
+  <section class="section compare-section">
+    <div class="section-inner">
+      <h2>Stop dragging windows around.</h2>
+      <div class="compare">
+        <div class="compare-col compare-old">
+          <p class="compare-label">Without GridTile</p>
+          <ul class="compare-steps">
+            <li>Grab</li><li>Drag</li><li>Resize</li><li>Adjust</li>
+          </ul>
+        </div>
+        <div class="compare-divider" aria-hidden="true"></div>
+        <div class="compare-col compare-new">
+          <p class="compare-label">With GridTile</p>
+          <ul class="compare-steps compare-steps-fast">
+            <li><kbd class="mini-key">⌃⌥1</kbd> Activate</li>
+            <li><kbd class="mini-key">A</kbd> → <kbd class="mini-key">F</kbd></li>
+            <li>Done</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUR KEYBOARD ALREADY KNOWS -->
+  <section class="section keys-know-section">
+    <div class="section-inner">
+      <h2>Order doesn't matter.</h2>
+      <p class="section-lede">Any two keys always describe the same rectangle.</p>
+      <div class="mini-grid-examples" id="miniGridExamples"></div>
+    </div>
+  </section>
+
+  <!-- YOUR GRID. YOUR RULES. -->
+  <section class="section config-section" id="features">
+    <div class="section-inner">
+      <h2>Your grid. Your rules.</h2>
+      <p class="section-lede">Grid size and shortcut are yours to set — switch layouts for different workflows.</p>
+
+      <div class="config-showcase" id="configShowcase">
+        <div class="config-tabs" id="configTabs" role="tablist" aria-label="Example layouts">
+          <button class="config-tab is-selected" type="button" role="tab" aria-selected="true" data-config="0">Everyday</button>
+          <button class="config-tab" type="button" role="tab" aria-selected="false" data-config="1">Coding</button>
+          <button class="config-tab" type="button" role="tab" aria-selected="false" data-config="2">Ultrawide</button>
+        </div>
+
+        <div class="config-stage">
+          <div class="config-grid" id="configGrid" role="img" aria-label="Example grid layout"></div>
+          <div class="config-meta">
+            <span class="config-meta-label">Grid</span>
+            <span class="config-meta-value" id="configDims">5 × 3</span>
+            <span class="config-meta-label">Shortcut</span>
+            <span class="config-meta-value config-meta-shortcut" id="configShortcut">
+              <kbd class="mini-key">⌃</kbd><kbd class="mini-key">⌥</kbd><kbd class="mini-key">1</kbd>
+            </span>
+          </div>
+        </div>
+        <p class="config-note">Illustrative — your actual layouts and shortcuts are fully configurable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT FOR MACOS -->
+  <section class="section native-section">
+    <div class="section-inner">
+      <h2>Built for macOS.</h2>
+      <p class="section-lede">A native menu bar app. Nothing in your Dock, nothing in your way.</p>
+
+      <div class="native-grid">
+        <div class="native-item"><h3>Menu bar only</h3><p>No Dock icon, no app switcher entry.</p></div>
+        <div class="native-item"><h3>Works everywhere</h3><p>Moves whatever window is focused, in any app.</p></div>
+        <div class="native-item"><h3>Global shortcut</h3><p>Registered at the system level, fires instantly.</p></div>
+        <div class="native-item"><h3>Notarized download</h3><p>Direct from GitHub, not the App Store.</p></div>
+      </div>
+      <p class="native-req">Requires macOS 14 or later.</p>
+    </div>
+  </section>
+
+  <!-- OPEN SOURCE -->
+  <section class="section opensource-section">
+    <div class="section-inner">
+      <h2>Open source.</h2>
+      <p class="section-lede">Small enough to read in one sitting.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Native macOS</span>
+        <span class="tech-tag">Accessibility API</span>
+        <span class="tech-tag">Keyboard driven</span>
+        <span class="tech-tag">Swift &amp; SwiftUI</span>
+      </div>
+      <a class="text-link" href="https://github.com/ujwalnk/GridTile">Explore the source →</a>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section final-cta">
+    <div class="section-inner">
+      <h2>Your windows. Your keyboard.</h2>
+      <p class="section-lede">Free and open source. Press a shortcut, tap two keys, get back to work.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/ujwalnk/GridTile/releases/latest">Download GridTile</a>
+        <a class="btn btn-secondary" href="https://github.com/ujwalnk/GridTile">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+<span class="brand brand-footer">
+  <img class="brand-icon" src="./favicon.png" alt="">
+  GridTile
+</span>
+    <a href="https://github.com/ujwalnk/GridTile">GitHub</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
