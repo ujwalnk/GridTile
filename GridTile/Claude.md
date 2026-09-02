@@ -1,4 +1,3 @@
-
 # CLAUDE.md — GridTile project memory
 
 Compressed architectural context for AI-assisted work on GridTile. Read this
@@ -128,49 +127,70 @@ useful to do if they fail).
 window's AX position/size. Sequence:
 1. Re-check AX trust + `window.stillExists`.
 2. Convert target Cocoa-space rect → AX-space via `axFrame(fromCocoaFrame:)`.
-3. Set `kAXPositionAttribute` **then** `kAXSizeAttribute` (in that order —
-   see rationale below). Both must report `.success` or the whole call
-   throws `.windowMoveFailed`.
-4. Read back the resulting AX position via `currentFrame(of:)` and, **only
-   if it drifted from the requested origin** (tolerance 0.5pt), re-issue a
-   single corrective `kAXPositionAttribute` write.
+3. Set `kAXPositionAttribute` **then** `kAXSizeAttribute` (position before
+   size — see rationale below), then read back the window's *actual*
+   resulting AX frame via `currentFrame(of:)` and compare both position and
+   size against what was requested (1pt tolerance). If both match, done. If
+   not, retry — bounded to 4 total attempts, 25ms apart — re-issuing both
+   attributes and re-verifying each time. Only if the mismatch survives the
+   full retry budget does it throw `.windowMoveFailed`.
 
-### Known historical bug (fixed) — intermittent "moved but not resized"
+### Known historical bug (fixed) — intermittent "moved but not resized",
+### worse the faster the user selected cells
 
-Symptom: GridTile's position write always took effect; the size write
+Symptom: GridTile's position write reliably took effect; the size write
 intermittently silently didn't (no thrown error — `AXUIElementSetAttributeValue`
 reported `.success` for both calls; the window just kept its old size).
+Reproduction narrowed it down further: selecting the two grid cells slowly
+(a real gap between the two keystrokes) was reliably correct; selecting
+them quickly/back-to-back reliably reproduced the bug.
 
-Root cause: the previous implementation set position, then size, then
-**unconditionally** re-issued the position write a third time immediately
-afterward (intended to correct for apps that clamp size in a way that
-shifts position as a side effect). For apps whose AX size handler applies
-the resize asynchronously (deferred to their own next layout/display pass
-rather than synchronously inside the AX call), that immediate, unconditional
-third write raced with the pending resize: if the app processed the
-redundant position write before its own resize had committed internally, it
-re-derived the window's frame from its still-stale size while handling the
-move, discarding the pending resize. Because the relative timing of "app's
-internal resize completes" vs. "app processes the next AX message" isn't
-deterministic, the failure was intermittent.
+That timing dependency is the key fact, and it rules out the cell-selection
+code itself as the cause: `WindowManager.apply` runs exactly once, after
+selection completes, regardless of how fast the two keys were pressed —
+nothing about the AX calls inside it varies with keystroke timing directly.
+What *does* vary is how much wall-clock time has elapsed between GridTile
+taking key/main status away from the target app (`NSApp.activate` in
+`GridOverlayController.show()`, called once at the very start of
+activation, before either cell is selected) and `apply()` actually running
+(once selection completes). Fast selection = less elapsed time for the
+target app to finish reacting to losing focus; slow selection = more.
 
-Fix: removed the unconditional third write. The corrective position write
-is now conditional — only sent if reading the window's actual resulting AX
-frame back shows position genuinely drifted from what was requested. This
-still handles the "app clamped size and shifted position" case the original
-code was guarding against, without the redundant blind write that raced
-with async resizers. Position-before-size ordering was kept (not the cause
-of the bug) because it's independently useful: apps that validate a
-requested size against the window's *current* position (to keep it from
-being placed off-screen) evaluate the size request against the frame's new
-origin rather than a stale one.
+Root cause: some apps apply a programmatic AX frame change *asynchronously*
+relative to their own focus-resignation handling — on a later layout/
+display pass, not synchronously inside the AX call — and a frame change
+sent while that handling is still in flight can have part of it (typically
+size) silently dropped or clamped, with the AX call still reporting
+`.success`. An earlier attempted fix (unconditionally re-sending a
+corrective `kAXPositionAttribute` write immediately after the size write)
+made this worse for the same reason: an unconditional, unverified follow-up
+write immediately after another write to the same element is itself a race
+against whatever the app is still doing internally from the first write.
 
-**Invariant for future changes to this function**: never add an
-unconditional AX attribute write that immediately follows another write to
-the *same* element without an intervening read-back check — that pattern is
-exactly what caused this bug, and it's easy to reintroduce by, e.g., adding
-another "just in case" corrective write. If a correction is needed, verify
-first, correct only if actually wrong.
+Fix: replaced any unconditional/blind follow-up writes with a **bounded,
+verified retry**: after writing both attributes, read back the window's
+real resulting AX frame and compare against the request; only retry (both
+attributes together, re-verified each time) if it's actually still wrong,
+up to 4 attempts with a 25ms gap. Compliant apps resolve on attempt 1 and
+pay no extra latency; only genuine mismatches pay the small bounded retry
+cost. This checks size as well as position — a gap in the very first
+attempted fix, which only ever re-verified position and would have missed
+a silently-dropped size change entirely.
+
+**Invariants for future changes to this function**:
+- Never add an unconditional AX attribute write that immediately follows
+  another write to the same element without an intervening read-back
+  check — verify first, correct only if actually wrong.
+- Any "did the write actually take effect" check must compare **both**
+  position and size, not just one — this codebase's bug history is
+  specifically about size silently failing while position succeeds.
+- If this function's failure/success characteristics ever again appear to
+  correlate with wall-clock timing elsewhere in the activation flow (how
+  long the overlay was up, how fast the user acted, etc.) rather than with
+  anything inside this function itself, look at what elapsed-time-sensitive
+  state changed elsewhere during that window — in this case, the target
+  app's focus-resignation handling — rather than re-examining the AX call
+  sequence in isolation.
 
 `currentFrame(of:)` reads current position+size via
 `AXUIElementCopyAttributeValue` and converts back to Cocoa space; used both

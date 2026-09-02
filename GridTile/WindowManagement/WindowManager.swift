@@ -34,35 +34,68 @@ enum WindowManager {
             throw GridTileError.windowMoveFailed("could not construct AX values")
         }
 
-        let positionResult = AXUIElementSetAttributeValue(window.axWindow, kAXPositionAttribute as CFString, positionValue)
-        let sizeResult = AXUIElementSetAttributeValue(window.axWindow, kAXSizeAttribute as CFString, sizeValue)
+        // GridTile's own activation (`NSApp.activate(ignoringOtherApps:)`,
+        // called when the overlay is shown — see `GridOverlayController`)
+        // takes key/main status away from `window`'s application *before*
+        // the user makes any cell selection at all. How long that
+        // application has had to finish reacting to losing key/main status
+        // by the time we get here is exactly "how long the overlay stayed
+        // up," i.e. how long the user took to pick two cells — not anything
+        // about the AX calls below. Several apps apply a programmatic AX
+        // frame change asynchronously relative to their own focus-resignation
+        // handling (on a later layout/display pass rather than synchronously
+        // inside the AX call), so a frame change applied while that handling
+        // is still in flight can be partially dropped or clamped — reported
+        // as `.success` regardless. That's why this was reproducible as
+        // "fast selection → broken, slow selection → fine": less elapsed
+        // settle time makes the race more likely to be lost, not the
+        // keystrokes themselves.
+        //
+        // Fix: verify the window's *actual* resulting AX frame against what
+        // was requested, and only if it doesn't match, retry — bounded, and
+        // only for the attribute(s) that are actually still wrong. This is
+        // deliberately not a blind pre-emptive delay: compliant apps (the
+        // common case) resolve on the first attempt and pay no extra cost;
+        // only a genuine mismatch pays the (small, bounded) retry cost.
+        let maxAttempts = 4
+        let retryDelay: TimeInterval = 0.100
+        let tolerance: CGFloat = 1.0
 
-        guard positionResult == .success, sizeResult == .success else {
-            throw GridTileError.windowMoveFailed("the application declined the new frame")
-        }
+        var lastPositionResult: AXError = .success
+        var lastSizeResult: AXError = .success
 
-        // Some apps clamp size in a way that shifts position as a side
-        // effect, so the resulting position can drift from what was
-        // requested even though both calls above reported success. Correct
-        // that — but only when it actually happened: re-issuing the position
-        // write unconditionally, immediately after the size write, races
-        // with apps that apply a programmatic resize asynchronously (e.g. on
-        // their next layout/display pass rather than synchronously inside
-        // the AX call). For those apps, an unconditional follow-up position
-        // write can be processed by the app *before* its own pending resize
-        // has been committed internally; the app then re-derives the frame
-        // from its still-stale size when handling the move, silently
-        // discarding the resize. That race is what produced GridTile's
-        // intermittent "moved but not resized" bug. Reading the actual
-        // resulting frame back and only correcting position when it's
-        // actually wrong avoids sending that redundant, racy AX call in the
-        // common case.
-        if let resultingFrame = currentFrame(of: window) {
+        for attempt in 1...maxAttempts {
+            lastPositionResult = AXUIElementSetAttributeValue(window.axWindow, kAXPositionAttribute as CFString, positionValue)
+            lastSizeResult = AXUIElementSetAttributeValue(window.axWindow, kAXSizeAttribute as CFString, sizeValue)
+
+            guard let resultingFrame = currentFrame(of: window) else {
+                throw GridTileError.targetWindowDisappeared
+            }
             let resultingAXFrame = Self.axFrame(fromCocoaFrame: resultingFrame)
-            if abs(resultingAXFrame.origin.x - origin.x) > 0.5 || abs(resultingAXFrame.origin.y - origin.y) > 0.5 {
-                AXUIElementSetAttributeValue(window.axWindow, kAXPositionAttribute as CFString, positionValue)
+
+            let positionMatches = abs(resultingAXFrame.origin.x - origin.x) <= tolerance
+                && abs(resultingAXFrame.origin.y - origin.y) <= tolerance
+            let sizeMatches = abs(resultingAXFrame.width - size.width) <= tolerance
+                && abs(resultingAXFrame.height - size.height) <= tolerance
+
+            if positionMatches && sizeMatches {
+                return
+            }
+
+            if attempt < maxAttempts {
+                Thread.sleep(forTimeInterval: retryDelay)
             }
         }
+
+        guard lastPositionResult == .success, lastSizeResult == .success else {
+            throw GridTileError.windowMoveFailed("the application declined the new frame")
+        }
+        // The AX calls themselves reported success every time, but the
+        // window's actual frame still doesn't match the request after the
+        // full retry budget — the application is silently clamping or
+        // ignoring part of the requested frame rather than rejecting it
+        // outright.
+        throw GridTileError.windowMoveFailed("the application did not apply the full requested frame")
     }
 
     /// Converts an AppKit-space (bottom-left origin) global rectangle to

@@ -14,6 +14,7 @@
 		2001D924C2CA4C01911F1113 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F6CE92DADE4852BC69EC57 /* WindowManager.swift */; };
 		3B10FB5C941045F2AA094EF5 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399780C86AC7481B999A561C /* PermissionsView.swift */; };
 		3F54A7D68F81460C9C8BD637 /* BackgroundStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5756B9E12A56BFAE12C38BE /* BackgroundStyle.swift */; };
+		45B19D4C30480A8A002CDB38 /* Claude.md in Resources */ = {isa = PBXBuildFile; fileRef = 45B19D4B30480A84002CDB38 /* Claude.md */; };
 		45CC8A3130385CC900F477A5 /* Claude.md in Resources */ = {isa = PBXBuildFile; fileRef = 45CC8A3030385CC600F477A5 /* Claude.md */; };
 		45D81E24303479DD00B84A67 /* icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 45D81E23303479DD00B84A67 /* icon.icon */; };
 		47DE98F0210647F8A38FEE90 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B1FD8D55F04370A6B67DA4 /* ScreenManager.swift */; };
@@ -54,6 +55,7 @@
 		38E0F86A385F4580ACD185ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		399780C86AC7481B999A561C /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		3A0D5CE5F4D849AC83060F95 /* GridOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayController.swift; sourceTree = "<group>"; };
+		45B19D4B30480A84002CDB38 /* Claude.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Claude.md; sourceTree = "<group>"; };
 		45CC8A3030385CC600F477A5 /* Claude.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Claude.md; sourceTree = "<group>"; };
 		45D81E23303479DD00B84A67 /* icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon.icon; sourceTree = "<group>"; };
 		47A0A39AB53F44ED931E2B8C /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				B2A98263FF1848EB92CEDE20 /* WindowManagement */,
 				FE122E24A6C840839C2D8211 /* Assets.xcassets */,
 				45CC8A3030385CC600F477A5 /* Claude.md */,
+				45B19D4B30480A84002CDB38 /* Claude.md */,
 				89B8B25B728A47C0B6FB97C3 /* Info.plist */,
 				526517541BC34A9789943734 /* GridTile.entitlements */,
 				45D81E23303479DD00B84A67 /* icon.icon */,
@@ -294,6 +297,7 @@
 			files = (
 				45D81E24303479DD00B84A67 /* icon.icon in Resources */,
 				45CC8A3130385CC900F477A5 /* Claude.md in Resources */,
+				45B19D4C30480A8A002CDB38 /* Claude.md in Resources */,
 				E017A0F9EA2F4763B1035ABE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
